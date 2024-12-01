@@ -1,10 +1,17 @@
 import 'package:bloc_clean_architecture/config/routes/route_name.dart';
 import 'package:bloc_clean_architecture/config/routes/routes.dart';
+import 'package:bloc_clean_architecture/respository/auth_repo/login_http_repository.dart';
+import 'package:bloc_clean_architecture/respository/auth_repo/login_repository.dart';
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart'; // Package for dependency injection
+
+GetIt getIt = GetIt.instance;
 
 void main() {
+  serviceLocator();
   runApp(const MyApp());
 }
+
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -15,21 +22,6 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Bloc Clean Architecture',
       theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // TRY THIS: Try running your application with "flutter run". You'll see
-        // the application has a purple toolbar. Then, without quitting the app,
-        // try changing the seedColor in the colorScheme below to Colors.green
-        // and then invoke "hot reload" (save your changes or press the "hot
-        // reload" button in a Flutter-supported IDE, or press "r" if you used
-        // the command line to start the app).
-        //
-        // Notice that the counter didn't reset back to zero; the application
-        // state is not lost during the reload. To reset the state, use hot
-        // restart instead.
-        //
-        // This works for code too, not just values: Most code changes can be
-        // tested with just a hot reload.
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
@@ -37,4 +29,10 @@ class MyApp extends StatelessWidget {
       onGenerateRoute: Routes.generateRoute,
     );
   }
+
+}
+
+
+void serviceLocator(){
+  getIt.registerLazySingleton<LoginRepository>(()=>LoginHttpRepository());
 }

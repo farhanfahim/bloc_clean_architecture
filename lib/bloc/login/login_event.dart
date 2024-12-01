@@ -24,9 +24,9 @@ class PasswordChanged extends LoginEvent{
 
 }
 
-class LoginButton extends LoginEvent{
+class LoginApi extends LoginEvent{
 
   @override
-  List<Object?> get props => throw UnimplementedError();
+  List<Object?> get props => [];
 
 }
